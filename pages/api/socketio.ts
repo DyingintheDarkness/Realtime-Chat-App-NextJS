@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest } from "next";
 import { Server as ServerIO, Socket } from "socket.io";
 import { NextApiResponseServerIO } from "../../types/socket";
 
@@ -13,7 +13,7 @@ export default async function SocketHandler(
 ) {
   let io = res.socket.server.io;
   if (!io) {
-    const io = new ServerIO(res.socket.server);
+    io = new ServerIO(res.socket.server);
     res.socket.server.io = io;
     io.on("connection", (socket: Socket) => {
       console.log("Client connected");
